@@ -10,16 +10,18 @@ describe('server.js', () => {
             expect(resp.status).toBe(200);
         });
 
-        it('should return Text', () => {
+        it('should return JSON', async () => {
             const resp = await request(server).get('/');
 
-            expect(resp.type).toBe('text/html')
+            expect(resp.type).toBe('application/json')
         });
 
-        it('should return `Welcome to the Main API`', async () => {
+        it('should return `{message: Welcome to the Main API}`', async () => {
             const resp = await request(server).get('/');
 
-            expect(resp.body).toEqual('Welcome to the Main API');
+            expect(resp.body).toEqual({
+                message: 'Welcome to the Main API'
+            });
         });
     });
 });
