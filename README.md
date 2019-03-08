@@ -25,8 +25,20 @@ In this challenge use `Test Driven Development` to build a RESTful API using Nod
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 1. In Jest, what are the differences between `describe()` and `it()` globals, and what are good uses for them?
-1. What is the point of `Test Driven Development`? What do you think about this approach?
-1. Mention three types of automated tests.
+   
+   1. Jest uses both globals for organization purposes. These globals break down the tests for easier use and viewing purposes.
+   2. `describe()` is reserved for compartmentalizing tests. This will be based on how the developer chooses to organize his or her test suites. It does not run any tests within its immediate code block but holds blocks of `it()` code or even more nested `describe()` blocks. A `describe()` block can be used to organize tests by file, component, function or even be nested with 2 or more. The main thing to understand is `describe()` organizes tests, it does not run tests.
+   3. `it()` is reserved for individual tests. It should be as pure as possible without depending on any other parts of the application besides the piece it is testing. If an `it()` test needs to be broken down any more or tests more than one individual piece of the app, it is best to turn to a `describe()` block and nest the broken down `it()` blocks within.
+
+2. What is the point of `Test Driven Development`? What do you think about this approach?
+   
+   1. Test Driven Development (TDD) is a process of development that involves a series of multiple lifecycles. Each cycle can be described as Red, Green, Refactor, and sometimes Commit. The 'red' phase is where tests are written for the piece of the application being written. These tests will initially fail as there is no working code in place. This name comes from the fact that most terminals show failing tests in red. The 'green' phase is when the minimal amount of code needed to get the tests passing is written out. This turns all the tests in the terminal green and we do a happy dance. From here we refactor the code. We rewrite the code to make it easier to read and work with without changing the functionality of the code. After this, a few people practice commiting the working code to git before moving on to the next testing lifecycle.
+   2. I personally like TDD. It was how I originally learned to code. I didn't have to write the tests but I followed the tests to complete projects. TDD helps me organize my mind before I start working and makes sure I move in the right direction. Plus seeing all green tests gives me a sense of accomplishment. 
+   
+3. Mention three types of automated tests.
+   1. Unit Tests
+   2. Integration Tests
+   3. UI Regression Tests
 
 ## Project Set Up
 
