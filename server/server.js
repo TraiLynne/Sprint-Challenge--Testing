@@ -2,7 +2,11 @@ const express = require('express');
 
 const server = express();
 
-server.get('/', (req, res) => {
+const mainRouter = require('./components');
+
+server.use('/api', mainRouter);
+
+server.use('/', (req, res) => {
     res
         .status(200)
         .json({message: 'It\'s Working !!'})
