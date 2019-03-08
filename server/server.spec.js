@@ -16,11 +16,11 @@ describe('server.js', () => {
             expect(resp.type).toBe('application/json')
         });
 
-        it('should return `{message: Welcome to the Main API}`', async () => {
+        it(`should return {message: 'It\'s Working !!'}`, async () => {
             const resp = await request(server).get('/');
 
             expect(resp.body).toEqual({
-                message: 'Welcome to the Main API'
+                message: 'It\'s Working !!'
             });
         });
     });
