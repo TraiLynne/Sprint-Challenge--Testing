@@ -42,15 +42,50 @@ describe('Games', () => {
 
         describe('READ', () => {
             describe('Read All', () => {
-                it('should be defined', () => {
-                    
+                beforeAll(async () => {
+                    await gamesModel.create({
+                        title: 'Pacman',
+                        genre: 'Arcade',
+                        releaseYear: 1980
+                    });
+
+                    await gamesModel.create({
+                        title: 'Monopoly',
+                        genre: 'Board',
+                        releaseYear: 1935
+                    });
+
+                    await gamesModel.create({
+                        title: 'The Game of Life',
+                        genre: 'Board',
+                        releaseYear: 1860
+                    });
+
+                    await gamesModel.create({
+                        title: 'Basketball',
+                        genre: 'sport',
+                        releaseYear: 1891
+                    });
+
                 });
 
-                it('should return the correct number of records', () => {
-                    
+                it('should be defined', () => {
+                    expect(gamesModel.readAll).toBeDefined();
                 });
-                it('should return an array', () => {
-                    
+
+                it('should return the correct number of records', async () => {
+                    let games = await gamesModel.readAll();
+
+                    expect(games).toHaveLength(4);
+
+                    await gamesModel.create({title: 'Trouble', genre: 'board', releaseYear: 1965});
+
+                    expect(games).toHaveLength(5);
+                });
+
+                it('should return an array', async () => {
+                    let games = await gamesModel.readAll();
+                    expect(typeOf(games)).toBe('object');
                 });
             });
 
@@ -167,10 +202,35 @@ describe('Games', () => {
         });
 
         describe('GET /', () => {
-            it('should be defined', () => {
-                
-            });
+            beforeAll(async () => {
+                await gamesModel.create({
+                    title: 'Pacman',
+                    genre: 'Arcade',
+                    releaseYear: 1980
+                });
 
+                await gamesModel.create({
+                    title: 'Monopoly',
+                    genre: 'Board',
+                    releaseYear: 1935
+                });
+
+                await gamesModel.create({
+                    title: 'The Game of Life',
+                    genre: 'Board',
+                    releaseYear: 1860
+                });
+
+                await gamesModel.create({
+                    title: 'Basketball',
+                    genre: 'sport',
+                    releaseYear: 1891
+                });
+
+            });
+            afterAll(async () => {
+                await db('games').truncate();
+            });
             it('should return an Array', () => {
                 
             });
