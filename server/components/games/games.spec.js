@@ -1,4 +1,5 @@
 const request = require('supertest');
+const router = require('../../server');
 
 const gamesModel = require('./gamesModel');
 const db = require('../../../db/dbConfig');
@@ -34,6 +35,8 @@ describe('Games', () => {
                 });
 
                 expect(game.title).toBe('Pacman');
+                expect(game.genre).toBe('Arcade');
+                expect(game.releaseYear).toBe(1980);
             });
         });
 
@@ -67,23 +70,43 @@ describe('Games', () => {
 
     describe('Game Router', () => {
         describe('POST /', () => {
+            afterEach(async () => {
+                await db('games').truncate();
+            });
+
             describe('General expectations', () => {
-                it('should be defined', () => {
-                    
-                });
-                
-                it('should return JSON', () => {
-                    
+                it('should return JSON', async () => {
+                    const resp = await request(router).post('/api/games/').send({
+                        title: 'Pacman',
+                        genre: 'Arcade',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.type).toBe('application/json')
                 });
             });
 
             describe('Success', () => {
-                it('should return 201', () => {
-                    
+                it('should return 201', async () => {
+                    const resp = await request(router).post('/api/games/').send({
+                        title: 'Pacman',
+                        genre: 'Arcade',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.status).toBe(201);
                 });
     
-                it('should return the games data', () => {
-                    
+                it('should return the games data', async () => {
+                    const resp = await request(router).post('/api/games/').send({
+                        title: 'Pacman',
+                        genre: 'Arcade',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.newGame.title).toBe('Pacman');
+                    expect(resp.newGame.genre).toBe('Arcade');
+                    expect(resp.newGame.releaseYear).toBe(1980);
                 });
                 
             });
