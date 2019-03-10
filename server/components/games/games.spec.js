@@ -112,9 +112,30 @@ describe('Games', () => {
             });
 
             describe('Incomplete', () => {
-                it('should return 422', () => {
-                    
+                it('should return 422', async () => {
+                    let resp = await request(router).post('/api/games/').send({
+                        title: 'Pacman',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.status).toBe(422);
+
+                    resp = await request(router).post('/api/games/').send({
+                        genre: 'Arcade',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.status).toBe(422);
                 });
+
+                it('should return an errorMessage property', async () => {
+                    let resp = await request(router).post('/api/games/').send({
+                        title: 'Pacman',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.errorMessage).toBeDefined();
+                })
             });
 
             describe('Game Already Exists', () => {
