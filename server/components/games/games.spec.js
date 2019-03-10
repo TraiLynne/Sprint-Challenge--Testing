@@ -237,16 +237,22 @@ describe('Games', () => {
             afterAll(async () => {
                 await db('games').truncate();
             });
-            it('should return an Array', () => {
-                
+            it('should return an Array', async () => {
+                let resp = await request(router).get('/api/games/');
+
+                expect(typeof(resp.body)).toBe('object');
             });
 
-            it('should return JSON', () => {
-                
+            it('should return JSON', async () => {
+                let resp = await request(router).get('/api/games/');
+
+                expect(resp.type).toBe('application/json');
             });
             
-            it('should return 200 ok', () => {
-                
+            it('should return 200 ok', async () => {
+                let resp = await request(router).get('/api/games/');
+
+                expect(resp.status).toBe(200);
             });
         });
     });
