@@ -135,12 +135,33 @@ describe('Games', () => {
                     });
 
                     expect(resp.errorMessage).toBeDefined();
+
+                    resp = await request(router).post('/api/games/').send({
+                        genre: 'Arcade',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.errorMessage).toBeDefined();
                 })
             });
 
             describe('Game Already Exists', () => {
                 it('should return 405', () => {
-                    
+                    let resp = await request(router).post('/api/games/').send({
+                        title: 'Pacman',
+                        genre: 'Arcade',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.status).toBe(201);
+
+                    resp = await request(router).post('/api/games/').send({
+                        title: 'Pacman',
+                        genre: 'Arcade',
+                        releaseYear: 1980
+                    });
+
+                    expect(resp.status).toBe(405)
                 });
             });
         });
