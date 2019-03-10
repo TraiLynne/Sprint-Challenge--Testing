@@ -42,13 +42,21 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/', (req, res) => {
-    res
-        .status(200)
-        .json({
-            operation: 'GET',
-            url: '/api/games/'
-        });
+router.get('/', async (req, res) => {
+
+    try {
+        const games = await db.readAll();
+
+        res
+            .status(200)
+            .json(games);
+    } catch(err){
+        res
+            .status(500)
+            .json({
+                errorMessage: 'Houston we have a problem'
+            })
+    }
 });
 
 router.use('/', (req, res) => res.send('Welcome to the Games API'));
