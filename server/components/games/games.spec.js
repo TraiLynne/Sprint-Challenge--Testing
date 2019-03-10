@@ -104,9 +104,9 @@ describe('Games', () => {
                         releaseYear: 1980
                     });
 
-                    expect(resp.newGame.title).toBe('Pacman');
-                    expect(resp.newGame.genre).toBe('Arcade');
-                    expect(resp.newGame.releaseYear).toBe(1980);
+                    expect(resp.body.title).toBe('Pacman');
+                    expect(resp.body.genre).toBe('Arcade');
+                    expect(resp.body.releaseYear).toBe(1980);
                 });
                 
             });
@@ -134,19 +134,19 @@ describe('Games', () => {
                         releaseYear: 1980
                     });
 
-                    expect(resp.errorMessage).toBeDefined();
+                    expect(resp.body.errorMessage).toBeDefined();
 
                     resp = await request(router).post('/api/games/').send({
                         genre: 'Arcade',
                         releaseYear: 1980
                     });
 
-                    expect(resp.errorMessage).toBeDefined();
+                    expect(resp.body.errorMessage).toBeDefined();
                 })
             });
 
             describe('Game Already Exists', () => {
-                it('should return 405', () => {
+                it('should return 405', async () => {
                     let resp = await request(router).post('/api/games/').send({
                         title: 'Pacman',
                         genre: 'Arcade',
