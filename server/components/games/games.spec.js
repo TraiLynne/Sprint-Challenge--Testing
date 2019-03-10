@@ -10,6 +10,10 @@ describe('Games', () => {
                 await db('games').truncate();
             });
 
+            it('should be defined', () => {
+                expect(gamesModel.create).toBeDefined()
+            });
+
             it('should insert the provided game into the DB', async () => {
                 await gamesModel.create({
                     title: 'Pacman',
@@ -34,7 +38,22 @@ describe('Games', () => {
         });
 
         describe('READ', () => {
-            
+            describe('Read All', () => {
+                it('should be defined', () => {
+                    
+                });
+
+                it('should return the correct number of records', () => {
+                    
+                });
+                it('should return an array', () => {
+                    
+                });
+            });
+
+            describe('Read One', () => {
+                
+            });
         });
 
         describe('UPDATE', () => {
@@ -48,11 +67,56 @@ describe('Games', () => {
 
     describe('Game Router', () => {
         describe('POST /', () => {
-            
+            describe('General expectations', () => {
+                it('should be defined', () => {
+                    
+                });
+                
+                it('should return JSON', () => {
+                    
+                });
+            });
+
+            describe('Success', () => {
+                it('should return 201', () => {
+                    
+                });
+    
+                it('should return the games data', () => {
+                    
+                });
+                
+            });
+
+            describe('Incomplete', () => {
+                it('should return 422', () => {
+                    
+                });
+            });
+
+            describe('Game Already Exists', () => {
+                it('should return 405', () => {
+                    
+                });
+            });
         });
 
         describe('GET /', () => {
+            it('should be defined', () => {
+                
+            });
+
+            it('should return an Array', () => {
+                
+            });
+
+            it('should return JSON', () => {
+                
+            });
             
+            it('should return 200 ok', () => {
+                
+            });
         });
     });
 });
