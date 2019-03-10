@@ -78,14 +78,20 @@ describe('Games', () => {
 
                     expect(games).toHaveLength(4);
 
-                    await gamesModel.create({title: 'Trouble', genre: 'board', releaseYear: 1965});
+                    await gamesModel.create({
+                        title: 'Trouble',
+                        genre: 'board',
+                        releaseYear: 1965
+                    });
+
+                    games = await gamesModel.readAll();
 
                     expect(games).toHaveLength(5);
                 });
 
                 it('should return an array', async () => {
                     let games = await gamesModel.readAll();
-                    expect(typeOf(games)).toBe('object');
+                    expect(typeof(games)).toBe('object');
                 });
             });
 

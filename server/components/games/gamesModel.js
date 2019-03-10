@@ -9,7 +9,10 @@ const create = async game => {
     return findBy({id}).first();
 }
 
+const readAll = () => db('games');
+
 module.exports = {
     create,
-    findBy
+    findBy,
+    readAll
 }
